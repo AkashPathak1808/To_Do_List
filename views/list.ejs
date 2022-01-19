@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <style>
+        body {
+            background-image: linear-gradient(45deg, #87caca, #9ad1d1d4);
+            text-align: center;
+
+        }
+
+        h1 {
+            font-size: 3rem;
+            text-shadow: 4px 3px #9ad1d1d4;
+            margin: 3% 30%;
+            background-color: #9ad1d1d4;
+        }
+
+        div {
+            font-size: 1.5rem;
+            background-color: white;
+            margin: 5% auto;
+            padding: 2% 2% 2% 0;
+            width: 35%;
+            box-shadow: 0px 0px 10px 5px rgb(26 72 73);
+        }
+
+        li {
+            list-style: none;
+            padding: 1% 0;
+            text-align: left;
+            line-height: 3rem;
+        }
+
+        .add {
+            padding: 1% 2%;
+            font-family: cursive;
+            font-size: 1rem;
+            border-color: powderblue;
+            width: 60%;
+        }
+
+        button {
+            font-size: 1rem;
+            border-radius: 100%;
+            margin-left: 1%;
+            background-color: powderblue;
+        }
+
+        @media (max-width: 650px) {
+            div {
+                width: 60%
+            }
+
+            h1 {
+                margin: 3% 20%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>
+        <%= kindOfDay %>
+    </h1>
+    <div>
+        <ul>
+            <% newListItems.forEach(function(item){ %>
+                <form action="/delete" method="post">
+                    <li>
+                        <input type="checkbox" name="checkbox" value="<%=item._id%>" onChange="this.form.submit()">
+                        <%= item.name%>
+                    </li>
+                    <input type="hidden" name="listName" value="<%= kindOfDay%>"></input>
+                </form>
+                <% }) %>
+        </ul>
+
+
+        <form action="/" method="post">
+            <input type="text" name="newItem" placeholder="New Item" autofocus class="add">
+            <button type="submit" name="list" value="<%= kindOfDay %>">+</button>
+        </form>
+    </div>
+</body>
+
+</html>
