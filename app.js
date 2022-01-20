@@ -2,13 +2,15 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const _  = require("lodash");
+require('dotenv').config();
 
 const app = express();
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 
-mongoose.connect("mongodb+srv://Akash:akash1808@cluster0.jj1bn.mongodb.net/todolistdb", { useNewUrlParser: true });
+var uri = process.env.DB_PATH;
+mongoose.connect(uri, { useNewUrlParser: true });
 
 const itemsSchema = {
     name: String
@@ -116,3 +118,8 @@ app.post("/delete", function (req, res) {
 app.listen(4000, function (req, res) {
     console.log("Server is ready.");
 });
+
+function newFunction() {
+    const dotenv = require("dotenv");
+    dotenv.config();
+}
